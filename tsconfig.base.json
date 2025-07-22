@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "declaration": false,
     "composite": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
+    // "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
     "lib": ["es2022"],
@@ -16,7 +17,6 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": ["development"],
-    "declaration": false
+    "customConditions": ["development"]
   }
 }
