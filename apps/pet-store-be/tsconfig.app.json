@@ -1,13 +1,6 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "customConditions": null,
-    "composite": false,
-    "declaration": false,
-    "declarationMap": false,
-    "moduleResolution": "node",
-    "module": "esnext",
-    "lib": ["es2022", "dom"],
     "outDir": "dist",
     "types": ["node"],
     "rootDir": "src",

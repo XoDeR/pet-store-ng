@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "declaration": false,
+    //"declaration": false,
     "composite": true,
     "declarationMap": true,
     // "emitDeclarationOnly": true,
