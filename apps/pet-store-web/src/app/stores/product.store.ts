@@ -31,7 +31,8 @@ const initialState: ProductState = {
   error: null
 }
 
-export const ProductStore = signalStore({
+export const ProductStore = signalStore(
+  {
   providedIn: 'root'
 },
 withState(initialState),
