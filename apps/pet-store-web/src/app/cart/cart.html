@@ -33,7 +33,7 @@
                     </td>
                     <td>€{{ item.price | number : "1.2-2" }}</td>
                     <td>
-                        <input type="number" class="input input-bordered w-20" min="1" />
+                        <input [value]="item.quantity" type="number" class="input input-bordered w-20" min="1" />
                     </td>
                     <td>€{{ item.price * item.quantity | number : "1.2-2" }}</td>
                     <td>
@@ -47,7 +47,7 @@
 
     <div class="flex justify-between items-center">
         <div>
-
+            <p class="text-xl">Total: €{{ cartStore.totalAmount() | number : "1.2-2" }}</p>
         </div>
         <div class="space-x-4">
             <button class="btn btn-outline">Clear Cart</button>
