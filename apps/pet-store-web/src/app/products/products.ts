@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductStore } from '../stores/product.store';
 import { ProductCard } from '../components/product-card/product-card';
@@ -13,8 +13,6 @@ export class Products {
   productStore = inject(ProductStore);
 
   constructor() {
-    afterNextRender(() => {
-      this.productStore.loadProducts();
-    });
+    this.productStore.loadProducts();
   }
 }
