@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import untilDestroyed from '../utils/untilDestroyed';
 import { CartStore } from '../stores/cart.store';
+import { Product } from '@prisma/client';
 
 @Component({
   selector: 'app-products',
@@ -33,5 +34,9 @@ export class Products {
 
   onSearch(term: string) {
     this.searchSubject.next(term);
+  }
+
+  addToCart(product: Product) {
+    this.cartStore.addToCart(product);
   }
 }
