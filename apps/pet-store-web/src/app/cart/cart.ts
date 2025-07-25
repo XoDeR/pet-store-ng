@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CartStore } from '../stores/cart.store';
 
 @Component({
   selector: 'app-cart',
@@ -7,4 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cart.html',
   styleUrl: './cart.scss',
 })
-export class Cart {}
+export class Cart {
+  cartStore = inject(CartStore);
+}
