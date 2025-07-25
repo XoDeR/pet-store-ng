@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CartStore } from '../stores/cart.store';
 
 @Component({
   selector: 'app-checkout',
@@ -7,4 +8,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './checkout.html',
   styleUrl: './checkout.scss',
 })
-export class Checkout {}
+export class Checkout {
+  cartStore = inject(CartStore);
+
+  checkout() {
+    console.log('Checkout');
+  }
+}
