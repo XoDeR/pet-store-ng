@@ -3,6 +3,7 @@ import { ProductStore } from '../stores/product.store';
 import { ProductCard } from '../components/product-card/product-card';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import untilDestroyed from '../utils/untilDestroyed';
 
 @Component({
   selector: 'app-products',
@@ -14,12 +15,13 @@ export class Products {
   searchTerm = '';
   productStore = inject(ProductStore);
   searchSubject = new Subject();
+  destroyed = untilDestroyed();
 
   constructor() {
     this.productStore.loadProducts();
     afterNextRender(() => {
       this.searchSubject
-        .pipe(debounceTime(500), distinctUntilChanged())
+        .pipe(debounceTime(500), distinctUntilChanged(), this.destroyed())
         .subscribe((term) => {
           console.log(term);
         });
