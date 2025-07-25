@@ -14,7 +14,7 @@ import untilDestroyed from '../utils/untilDestroyed';
 export class Products {
   searchTerm = '';
   productStore = inject(ProductStore);
-  searchSubject = new Subject();
+  searchSubject = new Subject<string>();
   destroyed = untilDestroyed();
 
   constructor() {
@@ -24,6 +24,7 @@ export class Products {
         .pipe(debounceTime(500), distinctUntilChanged(), this.destroyed())
         .subscribe((term) => {
           console.log(term);
+          this.productStore.searchProducts(term);
         });
     });
   }
