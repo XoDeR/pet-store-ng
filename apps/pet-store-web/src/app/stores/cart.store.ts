@@ -1,4 +1,11 @@
-import { patchState, signalStore, withMethods, withState } from '@ngrx/signals';
+import { computed } from '@angular/core';
+import {
+  patchState,
+  signalStore,
+  withComputed,
+  withMethods,
+  withState,
+} from '@ngrx/signals';
 import { Product } from '@prisma/client';
 
 type CartItem = Product & {
@@ -18,6 +25,13 @@ export const CartStore = signalStore(
     providedIn: 'root',
   },
   withState(() => initialState),
+  withComputed((store) => ({
+    totalItems: computed(() =>
+      store.items().reduce((acc, item) => {
+        return acc + item.quantity;
+      }, 0)
+    ),
+  })),
   withMethods((store) => ({
     addToCart(product: Product, quantity = 1) {
       const currentItems = store.items();
