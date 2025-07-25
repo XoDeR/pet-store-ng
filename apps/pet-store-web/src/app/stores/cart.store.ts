@@ -69,5 +69,11 @@ export const CartStore = signalStore(
         );
       patchState(store, { items: updatedItems });
     },
+    removeFromCart(productId: string) {
+      const updatedItems = store
+        .items()
+        .filter((item) => item.id !== productId);
+      patchState(store, { items: updatedItems });
+    },
   }))
 );

@@ -37,7 +37,12 @@
                     </td>
                     <td>€{{ item.price * item.quantity | number : "1.2-2" }}</td>
                     <td>
-                        <button class="btn btn-outline btn-sm">Remove</button>
+                        <button 
+                            class="btn btn-outline btn-sm"
+                            (click)="cartStore.removeFromCart(item.id)"
+                        >
+                            Remove
+                        </button>
                     </td>
                 </tr>
                 }
