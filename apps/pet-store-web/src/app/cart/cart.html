@@ -55,7 +55,7 @@
             <p class="text-xl">Total: €{{ cartStore.totalAmount() | number : "1.2-2" }}</p>
         </div>
         <div class="space-x-4">
-            <button class="btn btn-outline">Clear Cart</button>
+            <button (click)="cartStore.clearCart()" class="btn btn-outline">Clear Cart</button>
             <a routerLink="/checkout" class="btn btn-secondary">Proceed to Checkout</a>
         </div>
     </div>
