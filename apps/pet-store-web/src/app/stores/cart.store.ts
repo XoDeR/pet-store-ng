@@ -8,6 +8,8 @@ import {
 } from '@ngrx/signals';
 import { Product } from '@prisma/client';
 
+const CART_LOCALSTORAGE_KEY = 'pet_store_cart';
+
 type CartItem = Product & {
   quantity: number;
 };
@@ -24,7 +26,17 @@ export const CartStore = signalStore(
   {
     providedIn: 'root',
   },
-  withState(() => initialState),
+  withState(() => {
+    if ('localStorage' in globalThis) {
+      return {
+        ...initialState,
+        items: JSON.parse(
+          localStorage.getItem(CART_LOCALSTORAGE_KEY) ?? '[]'
+        ) as CartItem[],
+      };
+    }
+    return initialState;
+  }),
   withComputed((store) => ({
     totalItems: computed(() =>
       store.items().reduce((acc, item) => {
@@ -60,6 +72,11 @@ export const CartStore = signalStore(
           items: [...store.items(), { ...product, quantity }],
         });
       }
+
+      localStorage.setItem(
+        CART_LOCALSTORAGE_KEY,
+        JSON.stringify(store.items())
+      );
     },
     updateQuantity(productId: string, quantity: number) {
       const updatedItems = store
@@ -68,17 +85,29 @@ export const CartStore = signalStore(
           cartItem.id === productId ? { ...cartItem, quantity } : cartItem
         );
       patchState(store, { items: updatedItems });
+
+      localStorage.setItem(
+        CART_LOCALSTORAGE_KEY,
+        JSON.stringify(store.items())
+      );
     },
     removeFromCart(productId: string) {
       const updatedItems = store
         .items()
         .filter((item) => item.id !== productId);
       patchState(store, { items: updatedItems });
+
+      localStorage.setItem(
+        CART_LOCALSTORAGE_KEY,
+        JSON.stringify(store.items())
+      );
     },
     clearCart() {
       patchState(store, {
         items: [],
       });
+
+      localStorage.removeItem(CART_LOCALSTORAGE_KEY);
     },
   }))
 );
