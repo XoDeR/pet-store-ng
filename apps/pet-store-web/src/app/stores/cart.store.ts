@@ -61,5 +61,13 @@ export const CartStore = signalStore(
         });
       }
     },
+    updateQuantity(productId: string, quantity: number) {
+      const updatedItems = store
+        .items()
+        .map((cartItem) =>
+          cartItem.id === productId ? { ...cartItem, quantity } : cartItem
+        );
+      patchState(store, { items: updatedItems });
+    },
   }))
 );

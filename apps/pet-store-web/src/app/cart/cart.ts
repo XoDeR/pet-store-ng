@@ -11,4 +11,12 @@ import { RouterLink } from '@angular/router';
 })
 export class Cart {
   cartStore = inject(CartStore);
+
+  updateQuantity(productId: string, event: Event) {
+    const target = event.target as HTMLInputElement;
+    const quantity = parseInt(target.value);
+    if (quantity > 0) {
+      this.cartStore.updateQuantity(productId, quantity);
+    }
+  }
 }
