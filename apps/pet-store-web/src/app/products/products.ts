@@ -4,6 +4,7 @@ import { ProductCard } from '../components/product-card/product-card';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import untilDestroyed from '../utils/untilDestroyed';
+import { CartStore } from '../stores/cart.store';
 
 @Component({
   selector: 'app-products',
@@ -14,6 +15,7 @@ import untilDestroyed from '../utils/untilDestroyed';
 export class Products {
   searchTerm = '';
   productStore = inject(ProductStore);
+  cartStore = inject(CartStore);
   searchSubject = new Subject<string>();
   destroyed = untilDestroyed();
 

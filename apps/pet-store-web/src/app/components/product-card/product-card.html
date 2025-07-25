@@ -4,8 +4,8 @@
         <h2 class="card-title">{{ product().name }}</h2>
         <p>{{ product().description }}</p>
         <div class="card-actions justify-between items-center">
-            <button class="btn btn-secondary">Add to Cart</button>
             <span class="text-xl font-bold">€{{ product().price }}</span>
+            <button (click)="onAddToCart(product())" class="btn btn-secondary">Add to Cart</button>
         </div>
     </div>
 </div>
