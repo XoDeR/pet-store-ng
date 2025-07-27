@@ -30,9 +30,20 @@ export class CheckoutService {
           },
           unit_amount: Math.round(item.price * 100),
         },
+        quantity: item.quantity,
       })),
+      mode: 'payment',
+      success_url: '',
+      cancel_url: '',
+      metadata: {
+        orderId: order.id,
+      },
     });
 
-    return 'This action adds a new checkout';
+    return {
+      url: session.url,
+      sessionId: session.id,
+      orderId: order.id,
+    };
   }
 }
