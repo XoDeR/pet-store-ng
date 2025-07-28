@@ -5,7 +5,7 @@ import { Apollo, gql } from 'apollo-angular';
 import { tap } from 'rxjs';
 
 const GET_ORDER = gql`
-  query GetOrder($id: String) {
+  query GetOrder($id: String!) {
     order(id: $id) {
       id
       totalAmount
