@@ -67,5 +67,10 @@ export const OrderStore = signalStore(
           })
         );
     },
+    setError(error: string) {
+      patchState(store, {
+        error,
+      });
+    },
   }))
 );
