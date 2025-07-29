@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { OrderStore } from '../../stores/order.store';
+import { OrderDetail } from '../../orders/components/order-detail/order-detail';
 
 @Component({
   selector: 'app-checkout-success',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, OrderDetail],
   templateUrl: './checkout-success.html',
   styleUrl: './checkout-success.scss',
 })
