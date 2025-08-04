@@ -60,11 +60,25 @@ export class OrdersService {
     });
   }
 
-  update(id: number, updateOrderInput: UpdateOrderInput) {
-    return `This action updates a #${id} order`;
+  update(id: string, updateOrderInput: UpdateOrderInput) {
+    return this.prisma.order.update({
+      where: {
+        id,
+      },
+      data: {
+        ...updateOrderInput,
+      },
+      include: {
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return `This action removes a #${id} order`;
   }
 }
