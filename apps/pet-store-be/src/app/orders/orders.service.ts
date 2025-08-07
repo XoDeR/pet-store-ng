@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { PrismaService } from '../prisma/prisma.service';
+import { DeleteOrderResp } from './dto/delete-order-resp';
+import { OrderStatus } from '@prisma/client';
 
 @Injectable()
 export class OrdersService {
@@ -78,7 +80,34 @@ export class OrdersService {
     });
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} order`;
+  async removeUnpaidOrder(id: string): Promise<DeleteOrderResp> {
+    const order = await this.prisma.order.findUnique({
+      where: {
+        id,
+      },
+    });
+    if (!order) {
+      return {
+        success: true,
+        orderId: id,
+      };
+    }
+    if (order.status === OrderStatus.PAYMENT_REQUIRED) {
+      await this.prisma.order.delete({
+        where: {
+          id,
+        },
+      });
+      return {
+        success: true,
+        orderId: id,
+      };
+    }
+
+    return {
+      success: false,
+      orderId: id,
+      error: `Order is not in ${OrderStatus.PAYMENT_REQUIRED} state`,
+    };
   }
 }
