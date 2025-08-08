@@ -47,6 +47,16 @@ const UPDATE_ORDER = gql`
   }
 `;
 
+const DELETE_UNPAID_ORDER = gql`
+  mutation RemoveOrder($id: String!) {
+    removeUnpaidOrder(id: $id) {
+      orderId
+      success
+      error
+    }
+  }
+`;
+
 export type OrderItemWithProduct = OrderItem & {
   product: Product;
 };
@@ -103,6 +113,27 @@ export const OrderStore = signalStore(
             },
           })
         )
+      )
+    ),
+    removeUnpaidOrder: rxMethod<string>(
+      pipe(
+        switchMap((id) =>
+          apollo.mutate<{
+            updateOrder: OrderWithItems;
+          }>({
+            mutation: DELETE_UNPAID_ORDER,
+            variables: {
+              id,
+            },
+          })
+        ),
+        tap({
+          next: ({ data }) => {
+            console.log('Unpaid order deleted', { data });
+            patchState(store, { error: null });
+          },
+          error: (error) => patchState(store, { error: error.message }),
+        })
       )
     ),
     setError(error: string) {
