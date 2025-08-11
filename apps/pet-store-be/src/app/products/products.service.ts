@@ -16,11 +16,12 @@ export class ProductsService {
 
   findAll(config: FindConfig = {}) {
     return this.prisma.product.findMany({
-      where: config.featured
-        ? {
-            isFeatured: true,
-          }
-        : undefined,
+      where:
+        config.featured !== undefined
+          ? {
+              isFeatured: config.featured,
+            }
+          : undefined,
     });
   }
 
