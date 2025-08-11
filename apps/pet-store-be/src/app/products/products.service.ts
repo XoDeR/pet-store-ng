@@ -4,17 +4,24 @@ import { UpdateProductInput } from './dto/update-product.input';
 import { PrismaService } from '../prisma/prisma.service';
 import { Product } from '@prisma/client';
 
+type FindConfig = { featured?: boolean };
+
 @Injectable()
 export class ProductsService {
-  constructor(private prisma: PrismaService) {
-  }
-  
+  constructor(private prisma: PrismaService) {}
+
   create(createProductInput: CreateProductInput) {
     return 'This action adds a new product';
   }
 
-  findAll() {
-    return this.prisma.product.findMany();
+  findAll(config: FindConfig = {}) {
+    return this.prisma.product.findMany({
+      where: config.featured
+        ? {
+            isFeatured: true,
+          }
+        : undefined,
+    });
   }
 
   findOne(id: string) {
@@ -32,8 +39,8 @@ export class ProductsService {
         OR: [
           { name: { contains: lowercaseTerm, mode: 'insensitive' } },
           { description: { contains: lowercaseTerm, mode: 'insensitive' } },
-        ]
-      }
+        ],
+      },
     });
   }
 
