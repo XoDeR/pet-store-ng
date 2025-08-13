@@ -48,3 +48,4 @@ notes.txt
 test-output
 
 .angular
+apps/pet-store-web/.env
