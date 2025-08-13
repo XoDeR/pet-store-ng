@@ -20,7 +20,7 @@ const GET_PRODUCTS = gql`
 
 const GET_FEATURED_PRODUCTS = gql`
   query GetFeaturedProducts($featured: Boolean) {
-    products {
+    products(featured: $featured) {
       id
       name
       description
