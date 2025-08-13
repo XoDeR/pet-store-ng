@@ -7,7 +7,7 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular/build:application",
+      "executor": "@ngx-env/builder:application",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/pet-store-web",
@@ -22,6 +22,9 @@
           }
         ],
         "styles": ["apps/pet-store-web/src/styles.scss"],
+        "ngxEnv": {
+          "prefix": "NG_APP"
+        },
         "server": "apps/pet-store-web/src/main.server.ts",
         "ssr": {
           "entry": "apps/pet-store-web/src/server.ts"
@@ -54,7 +57,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular/build:dev-server",
+      "executor": "@ngx-env/builder:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "pet-store-web:build:production"
@@ -66,7 +69,7 @@
       "defaultConfiguration": "development"
     },
     "extract-i18n": {
-      "executor": "@angular/build:extract-i18n",
+      "executor": "@ngx-env/builder:extract-i18n",
       "options": {
         "buildTarget": "pet-store-web:build"
       }

@@ -63,7 +63,7 @@
     "test": {
       "dependsOn": ["^build"]
     },
-    "@angular/build:application": {
+    "@ngx-env/builder:application": {
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
