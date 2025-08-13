@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  user,
 } from '@angular/fire/auth';
 
 @Injectable({
@@ -13,6 +14,7 @@ import {
 })
 export class AuthService {
   auth = inject(Auth);
+  currentUser$ = user(this.auth);
 
   async login(email: string, password: string) {
     try {

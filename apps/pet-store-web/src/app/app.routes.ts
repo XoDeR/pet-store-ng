@@ -7,7 +7,7 @@ export const appRoutes: Route[] = [
     redirectTo: 'home',
   },
   {
-    path: '',
+    path: 'home',
     loadComponent: async () => {
       const mod = await import('./home/home');
       return mod.Home;
