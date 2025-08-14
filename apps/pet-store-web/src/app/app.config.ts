@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideApollo(() => {
       const httpLink = inject(HttpLink);
       return {
-        link: httpLink.create({ uri: 'http://localhost:3000/graphql' }),
+        link: httpLink.create({ uri: `${environment.apiUrl}/graphql` }),
         cache: new InMemoryCache(),
       };
     }),

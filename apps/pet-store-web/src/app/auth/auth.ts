@@ -15,6 +15,7 @@ import {
 export class AuthService {
   auth = inject(Auth);
   currentUser$ = user(this.auth);
+  idToken = '';
 
   async login(email: string, password: string) {
     try {
@@ -42,6 +43,18 @@ export class AuthService {
       console.error('Signup error: ', error);
       throw error;
     }
+  }
+
+  async getToken() {
+    let token: string | null = null;
+    const user = this.auth.currentUser;
+    if (user) {
+      token = await user.getIdToken();
+    } else if (this.idToken) {
+      token = this.idToken;
+    }
+    console.log('getToken(): token', token);
+    return token;
   }
 
   async googleSignIn() {
