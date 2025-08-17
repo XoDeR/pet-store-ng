@@ -87,10 +87,12 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
     "express": "^4.21.2",
+    "firebase-admin": "^13.4.0",
     "graphql": "^16.11.0",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
     "stripe": "^18.3.0",
+    "tmp": "^0.2.5",
     "zone.js": "~0.15.0"
   },
   "overrides": {

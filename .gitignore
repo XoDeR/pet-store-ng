@@ -49,3 +49,5 @@ test-output
 
 .angular
 apps/pet-store-web/.env
+
+private
