@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateCheckoutDto } from './dto/create-checkout.dto';
 import { OrdersService } from '../orders/orders.service';
 import { Stripe } from 'stripe';
+import { FirebaseService } from '../firebase/firebase.service';
 
 const stripeSecret = process.env.STRIPE_SECRET;
 
@@ -13,9 +14,13 @@ const stripe = new Stripe(stripeSecret);
 
 @Injectable()
 export class CheckoutService {
-  constructor(private ordersService: OrdersService) {}
+  constructor(
+    private ordersService: OrdersService,
+    private firebaseService: FirebaseService
+  ) {}
 
   async create(createCheckoutDto: CreateCheckoutDto) {
+    let userId: string | undefined;
     const order = await this.ordersService.create({
       items: createCheckoutDto.items,
       totalAmount: createCheckoutDto.totalAmount,
