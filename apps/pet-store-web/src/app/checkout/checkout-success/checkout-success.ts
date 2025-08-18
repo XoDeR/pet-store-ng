@@ -2,7 +2,7 @@ import { afterNextRender, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { OrderStore } from '../../stores/order.store';
-import { OrderDetail } from '../../orders/components/order-detail/order-detail';
+import { OrderDetail } from '../../components/order-detail/order-detail';
 import { CartStore } from '../../stores/cart.store';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { map, pipe, switchMap } from 'rxjs';
