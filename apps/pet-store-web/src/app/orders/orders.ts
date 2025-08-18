@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { OrderStore } from '../stores/order.store';
 
 @Component({
   selector: 'app-orders',
@@ -7,4 +8,6 @@ import { CommonModule } from '@angular/common';
   templateUrl: './orders.html',
   styleUrl: './orders.scss',
 })
-export class Orders {}
+export class Orders {
+  orderStore = inject(OrderStore);
+}

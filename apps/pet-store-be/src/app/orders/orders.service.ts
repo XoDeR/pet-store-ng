@@ -49,6 +49,27 @@ export class OrdersService {
     });
   }
 
+  findUserOrders(userId: string) {
+    return this.prisma.order.findMany({
+      where: {
+        userId,
+        status: {
+          not: 'PAYMENT_REQUIRED',
+        },
+      },
+      include: {
+        items: {
+          include: {
+            product: true,
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+  }
+
   findOne(id: string) {
     return this.prisma.order.findUnique({
       where: { id },
