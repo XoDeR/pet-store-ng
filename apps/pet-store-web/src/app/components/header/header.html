@@ -36,6 +36,9 @@
           </button>
           <div *ngIf="isDropdownOpen"
             class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 text-gray-700" role="menu">
+            <li class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100">
+              <a routerLink="/orders">Orders</a>
+            </li>
             <button (click)="logout()" class="block w-full text-left px-4 py-2 text-sm hover:bg-gray-100"
               role="menuitem">
               Logout

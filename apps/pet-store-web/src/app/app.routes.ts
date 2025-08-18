@@ -57,6 +57,10 @@ export const appRoutes: Route[] = [
     },
   },
   {
+    path: 'orders',
+    loadComponent: () => import('./orders/orders').then((c) => c.Orders),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
