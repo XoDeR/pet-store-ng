@@ -6,7 +6,11 @@ import { OrderDetail } from '../../components/order-detail/order-detail';
 import { CartStore } from '../../stores/cart.store';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { map, pipe, switchMap } from 'rxjs';
-import { OrderStatus } from '@prisma/client';
+// import { OrderStatus } from '@prisma/client'; // this causes errors with prisma
+// https://stackoverflow.com/questions/79545867/angular-19-with-ssr-is-not-able-to-build-with-referenceerror-dirname-is-not-d
+// https://github.com/prisma/prisma/issues/22827
+// Workaround:
+import { OrderStatus } from '../../../extra.types';
 
 @Component({
   selector: 'app-checkout-success',
