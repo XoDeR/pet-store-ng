@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateOrderInput } from './dto/create-order.input';
+import {
+  CreateOrderInput,
+  CreateOrderServiceDto,
+} from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { PrismaService } from '../prisma/prisma.service';
 import { DeleteOrderResp } from './dto/delete-order-resp';
@@ -9,8 +12,8 @@ import { OrderStatus } from '@prisma/client';
 export class OrdersService {
   constructor(private prisma: PrismaService) {}
 
-  create(createOrderInput: CreateOrderInput) {
-    const { totalAmount, items } = createOrderInput;
+  create(createOrderInput: CreateOrderServiceDto) {
+    const { totalAmount, items, userId } = createOrderInput;
     return this.prisma.order.create({
       data: {
         totalAmount,
@@ -25,6 +28,7 @@ export class OrdersService {
             },
           })),
         },
+        userId,
       },
       include: {
         items: {

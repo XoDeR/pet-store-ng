@@ -19,11 +19,15 @@ export class CheckoutService {
     private firebaseService: FirebaseService
   ) {}
 
-  async create(createCheckoutDto: CreateCheckoutDto) {
+  async create(createCheckoutDto: CreateCheckoutDto, token: string) {
     let userId: string | undefined;
+    if (token) {
+      userId = await this.firebaseService.verifyToken(token);
+    }
     const order = await this.ordersService.create({
       items: createCheckoutDto.items,
       totalAmount: createCheckoutDto.totalAmount,
+      userId,
     });
 
     console.log('order created for stripe checkout', order.id);
