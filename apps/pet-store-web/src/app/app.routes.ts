@@ -61,6 +61,10 @@ export const appRoutes: Route[] = [
     loadComponent: () => import('./orders/orders').then((c) => c.Orders),
   },
   {
+    path: 'orders/:id',
+    loadComponent: () => import('./order/order').then((c) => c.Order),
+  },
+  {
     path: '**',
     redirectTo: 'home',
   },
