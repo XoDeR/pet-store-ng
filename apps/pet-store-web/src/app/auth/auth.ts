@@ -1,4 +1,5 @@
-import { inject, Injectable } from '@angular/core';
+import { isPlatformServer } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -8,14 +9,33 @@ import {
   signOut,
   user,
 } from '@angular/fire/auth';
+import cookies from 'js-cookie';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   auth = inject(Auth);
+  platformId = inject(PLATFORM_ID);
   currentUser$ = user(this.auth);
   idToken = '';
+  cookieKey = '__ps_session'; // ps -- pet store
+
+  constructor() {
+    if (isPlatformServer(this.platformId)) {
+      // set up server auth
+    } else {
+      // set up browser auth
+    }
+  }
+
+  handleCookie(token?: string) {
+    if (token) {
+      cookies.set(this.cookieKey, token);
+    } else {
+      cookies.remove(this.cookieKey);
+    }
+  }
 
   async login(email: string, password: string) {
     try {
